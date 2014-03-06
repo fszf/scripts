@@ -1,0 +1,4 @@
+###disable on whole system (use sudo)
+#sudo pipelight-plugin --disable silverlight
+###enable on user (don't use sudo)
+pipelight-plugin --enable silverlight

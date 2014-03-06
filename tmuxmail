@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Set maildirs
+maildirs="/home/frank604/Mail/*/INBOX/new/"
+
+find $maildirs -type f | wc -l

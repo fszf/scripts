@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Check if app is running on starting X
+
+list=(highlights mpd mpdscribble xautolock)
+
+for app in "${list[@]}"; do
+    check=$(ps -C "$app" -opid=)
+    if [[ -z "$check" ]]; then
+        case "$app" in
+         highlights) $HOME/Scripts/highlights &
+                    ;;
+                mpd) mpd $HOME/.mpd/mpd.conf
+                    ;;
+        mpdscribble) mpdscribble &
+                    ;;
+          xautolock) xautolock -time 8 -locker "slock" \
+                     -nowlocker "slock" -detectsleep &
+                    ;;
+        esac
+    fi
+done
+

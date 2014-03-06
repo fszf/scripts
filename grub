@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# remake grub and copy to right folder
+sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
+sudo cp /boot/efi/EFI/grub/grub.cfg /boot/grub/grub.cfg

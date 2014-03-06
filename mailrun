@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+PID=$(pgrep offlineimap)
+
+[ -n "$PID" ] && exit 1
+
+offlineimap -o -u quiet &>/dev/null &
+
+notmuch new
+
+exit 0
+

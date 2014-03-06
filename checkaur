@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Check for AUR updates and Aurphans
+
+aurfile=$(mktemp -t aurupdates.XXXXXX)
+orpfile=$(mktemp -t aurphans.XXXXXX)
+
+# remove old files
+[[ ( -e "$aurfile" && -e "$orpfile" ) ]] && rm /tmp/aur{phans,updates}*
+
+# check for updates
+/usr/bin/cower --color=never -u > "$aurfile"
+
+/usr/bin/aurphan -a > "$orpfile"

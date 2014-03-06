@@ -1,0 +1,44 @@
+#!/usr/bin/awk -f
+# script to manage modules for kernel builds
+
+# Copyright (c) 2013 Jason W Ryan
+# The MIT License (MIT) http://opensource.org/licenses/MIT
+
+BEGIN { dbfile = ARGV[2] }
+
+function red(s) {
+    printf "\033[1;31m" s "\033[0m "
+}
+
+# read in the array
+FILENAME != ARGV[3] {
+  modlist[$1]++; next
+}
+
+# check for ignored modules
+!modlist[$1]++ {
+  print $1 >> dbfile
+  close(dbfile)
+}
+
+{
+# modprobe modules
+if (p == 1) {
+  modload="sudo modprobe -a $(<"dbfile")"
+  system(modload)
+  close(modload)
+  }
+}
+
+{
+# update module count
+if ( getline < dbfile ) {
+  count++
+  }
+}
+
+END {
+  print red(count) "modules listed."
+}
+
+# vim:set ts=2 sts=2 sw=2 et:

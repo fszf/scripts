@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# edit dotfiles
+
+# Alternative for sh using GNU find
+# find "${dirs[@]}" -type f \( -name "*.conf" -o -name "conf" -o -name "config" -o -name "*rc" -o -name "*.cfg" \) -exec "$EDITOR" {} +
+# heavy lifting by falconindy: https://bbs.archlinux.org/viewtopic.php?id=128585
+
+dirs=($HOME/.$1* $HOME/.$1/ $XDG_CONFIG_HOME/$1/)
+IFS=$'\n'
+read -r -d '' -a files < \
+    <(find "${dirs[@]}" -type f \( \
+           -name "*.conf" \
+        -o -name "conf" \
+        -o -name "config" \
+        -o -name "*rc" \
+        -o -name "*.cfg" \) 2>/dev/null)
+
+(( ${#files[*]} )) && "$EDITOR" "${files}"
+

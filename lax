@@ -1,0 +1,27 @@
+#!/bin/bash
+# Pat Brisbin's wrapper to feed dmenu most frequently used items
+
+[[ -f $HOME/.dmenurc ]] && . $HOME/.dmenurc || dmenucmd='dmenu -i'
+cache="$HOME/.cache/dmenu_freq"
+
+print_executables() {
+  local IFS=':'
+
+  for bin in $PATH; do
+    lsx "$bin" 2>/dev/null
+  done
+}
+
+merge_with_cache() {
+    cat - "$cache" | sort | uniq -c | sort -rn | colrm 1 8
+}
+
+read -r -d '\n' -a most_used < <(print_executables | merge_with_cache)
+read -r run < <(printf '%s\n' "${most_used[@]}" | $dmenucmd)
+read -r -d '\n' -a top_100 < <(head -n 100 "$cache")
+
+if [[ -n "$run" ]]; then
+  $run &&
+  printf "%s\n" "$run" "${top_100[@]}" > "$cache"
+fi
+

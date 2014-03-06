@@ -1,0 +1,11 @@
+echo "Showing space used in top level dir"
+sudo du -smh /*
+echo "========================================="
+echo ""
+echo "Showing largest individual dir"
+sudo du -mxS / | sort -n | tail
+#echo "========================================="
+#echo ""
+#echo "Showing largest dir"
+#sudo du -ax --max-depth=3 / | sort -n | awk '{if($1 > 102400) print $1/1024 "MB" " " $2 }'
+

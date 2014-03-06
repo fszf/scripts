@@ -1,0 +1,11 @@
+echo "create a new repo from cli"
+echo "touch README.md"
+echo "git init"
+echo "git add REAMDME.md"
+echo "git commit -m "first commit""
+echo "git remote add origin https://github.com/frank604/reponame.git"
+echo "git push -u origin master"
+
+echo "push an existing repo from cli"
+echo "git remote add origin https://github.com/frank604/reponame.git"
+echo "git push -u origin master"

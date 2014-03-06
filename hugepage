@@ -1,0 +1,2 @@
+echo 'echo "madvise" >> /sys/kernel/mm/transparent_hugepage/defrag' | sudo -s
+cat /sys/kernel/mm/transparent_hugepage/defrag

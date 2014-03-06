@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# edit posts in Octopress
+
+[[ ${PWD##*/} == "octopress" ]] || exit 1
+
+if [[ $# == 1 ]]; then
+	find source/_posts/ -name "*$1*" -exec vim {} \;
+else
+	printf '%s\n' "Which post?" && exit 1
+fi
