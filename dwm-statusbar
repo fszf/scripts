@@ -1,27 +1,18 @@
 # ~/bin/dwm-statusbar
 # Adapted from w0ng status bar: https://github.com/w0ng/bin
 # Adapted from jasonwryan status bar: https://bitbucket.org/jasonwryan/shiv/src/1ad5950c3108a4e5a9dcb78888a1ccfeb9252b45/Scripts/dwm-status?at=default
+# Some original work/modifications by frank: https://github.com/frank604
 
 # Colour codes from dwm/config.h
 color0="\x01" # normal  
-color1="\x02" # selected
-color2="\x03" # jwr-red alert
-color3="\x04" # bright green on gray
-color4="\x05" # jwr-red
-#color5="\x06" # jwr-magenta
-color6="\x06" # jwr-yellow
-color7="\x08" # jwr-green
-color8="\x09" # ocean green
-color9="\x0a" # jwr-blue
-color10="\x0b" # indigo
-color11="\x0c" # violet
-color12="\x0d" # jwr-gray
+color6="\x06" # brightblue
 
 
 #---separator                              
 sp="$(echo -ne "${color0} ")" 
 sp1="$(echo -ne "${color0} | ")" 
 sp2="$(echo -ne "${color0}| ")"
+sp3="$(echo -ne "${color0}|")"
 
 #print_song_info() {
 #  track="$(mpc current)"
@@ -41,8 +32,10 @@ print_power() {
 }
 
 print_wifiqual() {
-  wifiqual="$(sudo cat /proc/net/wireless | awk 'FNR == 3 {print $3}' | tr -d [:punct:])"
-  echo -ne "${color6}¤${color0}${wifiqual}%"
+  wifiessid="$(/sbin/iwconfig 2>/dev/null | grep ESSID | cut -d: -f2)"
+  wifiawk="$(echo $wifiessid | awk -F',' '{gsub(/"/, "", $1); print $1}')"
+  wificut="$(echo $wifiawk | cut -d' ' -f1)"
+  echo -ne "${color6}¤${color0}${wificut}"
 }
 
 print_hddfree() {
@@ -123,7 +116,7 @@ print_cpu_used() {
 }
  
   # Pipe to status bar, not indented due to printing extra spaces/tabs
-  xsetroot -name "$(print_song_info)${sp}$(print_power)${sp1}$(print_wifiqual)${sp}$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp}$(print_datetime)"
+  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)$(print_datetime)"
 
   # reset old rates
   cpu_idle_old=$cpu_idle_now
