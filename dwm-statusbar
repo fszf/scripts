@@ -84,13 +84,13 @@ print_aurphans(){
     vol="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
     if [[ $mix == *\[off\]* ]]; then
       #red 2                                                
-      echo -e "${color6}í${color2}OFF"
+      echo -e "${color6}í${color2} OFF"
     elif [[ $mix == *\[on\]* ]]; then
       #green 9
-      echo -e "${color6}í${color0}${vol}%"
+      echo -e "${color6}í${color0}${vol}% "
     else
       #yellow6
-      echo -e "${color6}í${color2}---"
+      echo -e "${color6}í${color2} ---"
     fi
  }
 
@@ -116,7 +116,7 @@ print_cpu_used() {
 }
  
   # Pipe to status bar, not indented due to printing extra spaces/tabs
-  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)$(print_datetime)"
+  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp2}$(print_datetime)"
 
   # reset old rates
   cpu_idle_old=$cpu_idle_now
