@@ -97,7 +97,7 @@ print_aurphans(){
 
 print_datetime() {
   datetime="$(date "+%a %d %b %I:%M")"
-  echo -ne "${color6}É${sp}${color0}${datetime}"
+  echo -ne "${color6}É${color0}${datetime}"
 }
 
 # cpu (from: https://bbs.archlinux.org/viewtopic.php?pid=661641#p661641)
