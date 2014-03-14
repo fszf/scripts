@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#average battery usage in watts
+#Based off taylorchu's powerdown-functions
+
+
+has_bat() {
+    local bat
+    for bat in /sys/class/power_supply/BAT*; do
+        return 0
+    done
+    return 1
+}
+
+display_power() {
+    if ! has_bat; then
+        echo "No Battery Detected"
+        return
+    fi
+    local bat
+    for bat in /sys/class/power_supply/BAT*; do
+        local watt
+        if [[ -f "$bat/power_now" ]]; then
+            watt="$(bc <<< "scale=3; $(< "$bat/power_now") / 1000000")"
+        else
+            watt="$(bc <<< "scale=3; $(< "$bat/current_now") * $(< "$bat/voltage_now") / 1000000000000")"
+        fi
+        echo "$watt"
+    done
+}
+echo "deleting old powertemp log"
+rm powertemp
+
+echo "getting battery dissipation and writing output to file: powertemp"
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+sleep 1
+(display_power) | tee -a powertemp
+
+echo "average battery dissipation over 10s"
+awk '{ sum += $1; n++ } END { if (n > 0) print sum / n; }' powertemp 
