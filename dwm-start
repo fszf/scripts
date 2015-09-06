@@ -2,7 +2,7 @@
 # Script to start dwm in loop
 
 while true; do
-		$HOME/Scripts/dwm-statusbar
+		$HOME/src/scripts/dwm-statusbar
     	sleep 2
 done &
 

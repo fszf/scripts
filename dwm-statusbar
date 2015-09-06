@@ -5,7 +5,7 @@
 
 # Colour codes from dwm/config.h
 color0="\x01" # normal  
-color6="\x06" # brightblue
+color6="\x07" # green too lazy to make all color6 ro color7
 
 
 #---separator                              
@@ -116,7 +116,8 @@ print_cpu_used() {
 }
  
   # Pipe to status bar, not indented due to printing extra spaces/tabs
-  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp2}$(print_datetime)"
+  #xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp2}$(print_datetime)"
+  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
 
   # reset old rates
   cpu_idle_old=$cpu_idle_now

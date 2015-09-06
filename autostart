@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-# autostart apps
-
-tabbed -d >/tmp/tabbed.xid; vimprobable2 -e $(</tmp/tabbed.xid) &
-urxvtc -title "mutt" -e mutt &
-$HOME/Scripts/shux &
-

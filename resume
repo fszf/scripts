@@ -1,0 +1,9 @@
+# enable restart X
+setxkbmap -option terminate:ctrl_alt_bksp
+
+# disable CapsLock & map to Escape
+setxkbmap -option caps:swapescape
+
+# compose key
+#setxkbmap -option compose:ralt
+
