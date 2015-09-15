@@ -24,6 +24,7 @@ sp3="$(echo -ne "${color0}|")"
 print_power() {
   status="$(cat /sys/class/power_supply/ADP1/online)"
   battery="$(cat /sys/class/power_supply/BAT0/capacity)"
+  timer="$(acpi -b | grep "Battery" | awk '{print $5}' | cut -c 1-5)"
   if [ "${status}" == 1 ]; then
     echo -ne "${color6}Â${color0}ON ${battery}%"
   else
