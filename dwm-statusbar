@@ -6,7 +6,7 @@
 # Colour codes from dwm/config.h
 color0="\x01" # normal  
 color6="\x07" # green too lazy to make all color6 ro color7
-
+color7="\x06" 
 
 #---separator                              
 sp="$(echo -ne "${color0} ")" 
@@ -14,12 +14,12 @@ sp1="$(echo -ne "${color0} | ")"
 sp2="$(echo -ne "${color0}| ")"
 sp3="$(echo -ne "${color0}|")"
 
-#print_song_info() {
-#  track="$(mpc current)"
-#  artist="${track%%- *}"
-#  title="${track##*- }"
-#  [[ -n "$artist" ]] && echo -e "${color0}ê${sp}${color5}${artist}${color9}${title} ${color0}|"
-#}
+print_song_info() {
+  track="$(mpc current)"
+  artist="${track%%- *}"
+  title="${track##*- }"
+  [[ -n "$artist" ]] && echo -e "${color6}ê${color0}${artist}${color7}${title} ${color0}|"
+}
 
 print_power() {
   status="$(cat /sys/class/power_supply/ADP1/online)"
@@ -118,7 +118,8 @@ print_cpu_used() {
  
   # Pipe to status bar, not indented due to printing extra spaces/tabs
   #xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp2}$(print_datetime)"
-  xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
+  #xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
+  xsetroot -name "$(print_song_info)$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
 
   # reset old rates
   cpu_idle_old=$cpu_idle_now
