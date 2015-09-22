@@ -1,0 +1,50 @@
+#!/bin/sh
+
+usage="usage: $0 -c {play|stop|next|prev|info}" 
+command=
+
+shift $(($OPTIND - 1))
+command=$1
+
+STATUS=""
+if [ "$command" = "" ]; then
+    echo "usage: $0 {play|stop|next|prev|info}"
+    exit 0;
+fi
+
+if [ "$command" = "play" ]; then
+    mpc toggle
+    ARTIST=$(mpc -f "%artist%" current)
+    ALBUM=$(mpc -f "%album%" current)
+    TITLE=$(mpc -f "%title%" current)
+fi
+
+if [ "$command" = "next" ]; then
+    mpc next
+    ARTIST=$(mpc -f "%artist%" current)
+    ALBUM=$(mpc -f "%album%" current)
+    TITLE=$(mpc -f "%title%" current)
+fi
+
+if [ "$command" = "prev" ]; then
+    mpc prev
+    ARTIST=$(mpc -f "%artist%" current)
+    ALBUM=$(mpc -f "%album%" current)
+    TITLE=$(mpc -f "%title%" current)
+fi
+
+if [ "$command" = "info" ]; then
+    ARTIST=$(mpc -f "%artist%" current)
+    ALBUM=$(mpc -f "%album%" current)
+    TITLE=$(mpc -f "%title%" current)
+fi
+
+if [ "$command" = "stop" ]; then
+    mpc stop
+    STATUS="stop"
+fi
+
+if [ "$STATUS" != "stop" ]; then
+    #notify-send "$TITLE" "$ARTIST" -i "/media/MyBook/Music/$ARTIST/$ALBUM/$ALBUM.jpg" -h string:synchronous:mpd
+    notify-send "$TITLE" "$ARTIST" -i notification-audio-play -t 700 -h string:synchronous:mpd
+fi
