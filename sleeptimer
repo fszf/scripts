@@ -1,0 +1,91 @@
+#!/bin/bash
+#
+# sleeptimer.sh
+#
+# Author: Timothy A.V. Teatro <tim@timteatro.net>
+# Date  : Jan 11, 2011
+#
+# Description: A rather unsophisticated little script that I wrote for
+#    myself. Since I usually fall asleep listening to gnaural or watching
+#    a movie on my computer beside my bed, I wanted something to suspend
+#    my computer rather than using shutdown.
+#
+# Usage : sudo ./sleeptimer <integer>
+#    where <integer> is the number of minutes before the computer is suspended
+#
+#    This script is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#####################################################
+ 
+#
+# Must be run as root, so check id at the door.
+#
+if [ "$(id -u)" != "0" ]; then
+   echo Must be run as root.
+   exit 1
+fi
+ 
+min=$1 # Keep the first argument on the command line here
+elapsed=0
+ 
+#
+# Check to be sure argument is a number...
+#
+if [ $min -eq $min 2> /dev/null ]; then
+   #
+   # ... and if it is, then decide what to do with it
+   #
+   # If it's less than 15 minutes, we want to count down to 10, 5 and
+   # then 1 minute for feedback to the user.
+   # 
+   if [ $min -lt 15 ]; then
+      echo Sleeping in $min minutes [`date`]
+      while [ $elapsed -le $min ]; do
+         sleep 1m
+         elapsed=$((elapsed+1))
+         if [ $((min-elapsed)) -eq 10 ]; then
+            echo Sleeping in 10 min.
+         elif [ $((min-elapsed)) -eq 5 ]; then
+            echo Sleeping in 5 min.
+         elif [ $((min-elapsed)) -eq 1 ]; then
+            echo Sleeping in less than 1 min.
+         fi
+      done
+   else # If it's more, we'll count down in 15 minute intervals.
+      #
+      # Get the remainder of $min/15 and sleep that down.
+      #
+      remainder=`expr $min % 15`
+      sleep ${remainder}m
+      elapsed=$((elapsed+remainder))
+      #
+      # Now that the time remaining is a factor of 15, we'll sleep
+      # in 15 minute incriments until the last 15 minutes of the
+      # timer.
+      #
+      while [ $elapsed -lt $((min-15)) ]; do
+         sleep 15m
+         elapsed=$((elapsed+15))
+         echo Sleeping in $((min-elapsed)) minutes. [`date`]
+      done
+      sleep 5m
+      echo Sleeping in 10 minutes
+      sleep 5m
+      echo Sleeping in 5 minutes
+      sleep 4m
+      echo Sleeping in less than a minute.
+      sleep 1m
+   fi
+   #
+   # We've done our counting, now suspend.
+   #
+   echo "!!! NOW SUSPENDING YOUR MACHINE !!!"
+   systemctl suspend
+   exit 0
+else
+   echo $min is not an integer. Please specify the number of minutes before sleep.
+   exit 2
+fi
