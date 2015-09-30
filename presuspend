@@ -1,3 +1,4 @@
 #!/bin/sh
 /usr/sbin/udiskie-umount -a
 /usr/sbin/rm -r /media/Jetdrive*
+/home/frank604/src/scripts/removemod

@@ -1,0 +1,4 @@
+#!/bin/sh
+/usr/sbin/modprobe  xhci_pci
+/usr/sbin/modprobe  xhci_hcd
+
