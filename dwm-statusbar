@@ -5,8 +5,8 @@
 
 # Colour codes from dwm/config.h
 color0="\x01" # normal  
-color6="\x07" # green too lazy to make all color6 ro color7
-color7="\x06" 
+color6="\x07" # green 
+color7="\x06" # blue 
 
 #---separator                              
 sp="$(echo -ne "${color0} ")" 

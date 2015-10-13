@@ -1,4 +1,7 @@
 #!/bin/sh
-/usr/sbin/udiskie-umount -a
-/usr/sbin/rm -r /media/Jetdrive*
-/home/frank604/src/scripts/removemod
+#/usr/sbin/pkill mpv
+#/usr/sbin/pkill ranger
+#/usr/sbin/udisks --unmount /dev/Jetdrive1
+#/usr/sbin/rm -r /media/Jetdrive*
+#/usr/sbin/modprobe -r xhci_pci
+#/usr/sbin/modprobe -r xhci_hcd

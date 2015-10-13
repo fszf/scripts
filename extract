@@ -1,0 +1,36 @@
+#!/bin/sh
+
+GET="."
+
+SCRIPTNAME="${0##*/}"
+
+err() {
+    printf >&2 "$SCRIPTNAME: $*\n"
+    exit 1
+}
+
+ARC="$1"
+[[ -f $ARC ]] || err $"'$ARC' does not exist"
+ARC="$(readlink -f "$ARC")"
+
+read -p "Extract to [default: $DEFAULT_TARGET]: " TARGET
+[[ -z $TARGET ]] &&\
+    TARGET="$DEFAULT_TARGET"
+[[ -d $TARGET ]] || err $"Directory '$TARGET' does not exist"
+[[ -w $TARGET ]] || err $"Permission denied: '$TARGET' is not writable"
+
+cd "$TARGET"
+case "$ARC" in
+    *.tar.bz2)   tar xjf "$ARC"     ;;
+    *.tar.gz)    tar xzf "$ARC"     ;;
+    *.bz2)       bunzip2 "$ARC"     ;;
+    *.rar)       unrar e "$ARC"     ;;
+    *.gz)        gunzip "$ARC"      ;;
+    *.tar)       tar xf "$ARC"      ;;
+    *.tbz2)      tar xjf "$ARC"     ;;
+    *.tgz)       tar xzf "$ARC"     ;;
+    *.zip)       unzip "$ARC"       ;;
+    *.Z)         uncompress "$ARC"  ;;
+    *.7z)        7z x "$ARC"        ;;
+    *)           echo "'$ARC' cannot be extracted by $SCRIPTNAME" ;;
+esac

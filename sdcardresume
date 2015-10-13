@@ -1,0 +1,10 @@
+#!/bin/sh
+#/usr/sbin/modprobe -r xhci_pci
+#/usr/sbin/modprobe -r xhci_hcd
+
+#/usr/sbin/modprobe xhci_pci
+#/usr/sbin/modprobe xhci_hcd
+/usr/sbin/systemctl reset-failed
+#sleep 5
+#/usr/sbin/rm -r /media/Jetdrive
+#/usr/bin/udisks --mount /dev/Jetdrive1
