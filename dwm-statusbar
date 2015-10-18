@@ -41,7 +41,8 @@ print_wifiqual() {
 
 print_hddfree() {
   hddfree="$(df -Ph /dev/sda4 | awk '$3 ~ /[0-9]+/ {print $4}')"
-  echo -ne "${color6}¨${color0}${hddfree}"
+  hddfree2="$(df -Ph /dev/Jetdrive1 | awk '$3 ~ /[0-9]+/ {print $4}')"
+  echo -ne "${color6}¨${color0}${hddfree} ${hddfree2}"
 }
 
 print_email_count() {
