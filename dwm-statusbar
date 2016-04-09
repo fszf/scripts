@@ -22,7 +22,7 @@ print_song_info() {
 }
 
 print_power() {
-  status="$(cat /sys/class/power_supply/ADP1/online)"
+  status="$(cat /sys/class/power_supply/AC/online)"
   battery="$(cat /sys/class/power_supply/BAT0/capacity)"
   timer="$(acpi -b | grep "Battery" | awk '{print $5}' | cut -c 1-5)"
   if [ "${status}" == 1 ]; then
@@ -40,9 +40,8 @@ print_wifiqual() {
 }
 
 print_hddfree() {
-  hddfree="$(df -Ph /dev/sda4 | awk '$3 ~ /[0-9]+/ {print $4}')"
-  hddfree2="$(df -Ph /dev/Jetdrive1 | awk '$3 ~ /[0-9]+/ {print $4}')"
-  echo -ne "${color6}¨${color0}${hddfree} ${hddfree2}"
+  hddfree="$(df -Ph /dev/nvme0n1p2 | awk '$3 ~ /[0-9]+/ {print $4}')"
+  echo -ne "${color6}¨${color0}${hddfree}"
 }
 
 print_email_count() {
@@ -128,4 +127,3 @@ print_cpu_used() {
   # loop stats every 1 second
   sleep 1 
  done
- 

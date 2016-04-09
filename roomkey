@@ -1,0 +1,5 @@
+#!/bin/sh
+cd ~/.wine/drive_c
+cd Program\ Files\ \(x86\)
+cd RoomKey™\ by\ RSI/   
+wine RoomKey.exe
