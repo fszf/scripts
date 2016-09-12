@@ -1,0 +1,2 @@
+#!/bin/bash
+while true; do tput clear; date +"%I : %M : %S" | figlet ; cal -3 ; sleep 1; done     

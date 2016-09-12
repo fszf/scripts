@@ -1,0 +1,14 @@
+#http://unix.stackexchange.com/questions/106480/how-to-copy-files-from-one-machine-to-another-using-ssh
+
+
+echo "Syntax:"
+echo "scp <source> <destination>"
+echo "To copy a file from B to A while logged into B:"
+echo ""
+echo "scp /path/to/file username@a:/path/to/destination"
+echo "To copy a file from B to A while logged into A:"
+echo ""
+echo "scp username@b:/path/to/file /path/to/destination"
+echo ""
+echo "For Example: scp -P 22 sourcefile hostsite.com:/home/username/destinationfile"
+

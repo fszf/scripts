@@ -1,7 +1,0 @@
-#!/bin/sh
-#/usr/sbin/pkill mpv
-#/usr/sbin/pkill ranger
-#/usr/sbin/udisks --unmount /dev/Jetdrive1
-#/usr/sbin/rm -r /media/Jetdrive*
-#/usr/sbin/modprobe -r xhci_pci
-#/usr/sbin/modprobe -r xhci_hcd

@@ -24,13 +24,13 @@ fi
 display_brightness=0
 
 if [ "$command" = "up" ]; then
-    $(xbacklight -inc $increment)
-    display_brightness=$(xbacklight|cut --delimiter="." -f 1)
+    $(light -A $increment)
+    display_brightness=$(light|cut --delimiter="." -f 1)
 fi
 
 if [ "$command" = "down" ]; then
-    $(xbacklight -dec $increment)
-    display_brightness=$(xbacklight|cut --delimiter="." -f 1)
+    $(light -U $increment)
+    display_brightness=$(light|cut --delimiter="." -f 1)
 fi
 
 icon_name=""

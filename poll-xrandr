@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Help
+if [ -n "$1" ] && [[ $1 == "--help" ||  $1 == "-h" ]]; then
+  case $1 in
+    -h|--help)
+        echo "Usage:
+  poll-xrandr COMMAND [OPTIONS]
+
+Help Options:
+  -h, --help      Show this help
+
+COMMAND is required and is a command to be executed on any detected change to xrandr displays.
+
+Application Options:
+  -i, --interval     The interval for polling, defaults to 4 seconds (-i=4)
+"     ;;
+    *)
+      poll-xrandr --help
+      ;;
+  esac
+  exit
+fi
+
+if [ -z "$(pidof -x poll-xrandr -o %PPID)" ]; then
+  i=4 # default interval for polling.
+
+  connected="$(xrandr -q | grep " connected"|cut -d ' ' -f1|xargs)"
+
+  # Endless loop
+  while : ; do
+    # Re-read the status
+    #new_cat="`cat $f`"
+    connected_recheck="$(xrandr -q | grep " connected"|cut -d ' ' -f1|xargs)"
+
+    # If original contents don't match new we need to run command.
+    if [ "$connected" != "$connected_recheck" ]; then
+      # Set the original contents the same as new to avoid unnecessarily repeating
+      connected=$connected_recheck
+      autorandr --change --force
+    fi
+
+    shift 1
+    while [[ $# > 0 ]]; do
+      key=$1
+
+      case $key in
+        -i=*|--interval=*)
+          i="${key#*=}"
+          ;;
+        *)
+          echo "Unknown option provided, you should fix that."
+          ;;
+      esac
+      shift
+    done
+
+    sleep $i
+  done
+
+else
+  echo "poll-xrandr is already running: aborting..."
+  exit
+fi

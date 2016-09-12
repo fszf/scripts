@@ -4,9 +4,9 @@
 # Some original work/modifications by frank: https://github.com/frank604
 
 # Colour codes from dwm/config.h
-color0="\x01" # normal  
-color6="\x07" # green 
-color7="\x06" # blue 
+color0="\x04" # normal  
+color6="\x02" # green 
+color7="\x03" # blue 
 
 #---separator                              
 sp="$(echo -ne "${color0} ")" 
@@ -98,7 +98,7 @@ print_aurphans(){
 
 print_datetime() {
   datetime="$(date "+%a %d %b %I:%M")"
-  echo -ne "${color6}É${sp}${color0}${datetime}"
+  echo -ne "${color0}${datetime}"
 }
 
 # cpu (from: https://bbs.archlinux.org/viewtopic.php?pid=661641#p661641)
@@ -118,8 +118,8 @@ print_cpu_used() {
  
   # Pipe to status bar, not indented due to printing extra spaces/tabs
   #xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp1}$(print_email_count)$(print_pacup)$(print_aurups)$(print_aurphans)${sp2}$(print_volume)${sp2}$(print_datetime)"
-  #xsetroot -name "$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
-  xsetroot -name "$(print_song_info)$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
+  xsetroot -name "$(print_datetime)                                                                                       $(print_wifiqual)$(print_hddfree)$(print_volume)$(print_power)"
+  #xsetroot -name "$(print_song_info)$(print_power)${sp1}$(print_wifiqual)$(print_hddfree)${sp2}$(print_volume)${sp2}$(print_datetime)"
 
   # reset old rates
   cpu_idle_old=$cpu_idle_now
