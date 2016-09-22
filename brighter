@@ -1,0 +1,2 @@
+#sets brightness level to 200% when using value of 2 below
+xrandr --output eDP-1 --brightness 2
