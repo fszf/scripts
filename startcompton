@@ -1,3 +1,0 @@
-#!/bin/bash
-# https://github.com/gl3nnleblanc/dotfiles/blob/master/.config/startCompton
-compton -b --backend glx -cCGfF -o .5 -O 200 -I 200 -t 0 -l 0 -r 15 -D2 -m 0.88 -e 0.9
