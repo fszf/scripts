@@ -37,7 +37,7 @@ icon_name=""
 if [ "$command" = "mute" ]; then
     if amixer get Master | grep "\[on\]"; then
         display_volume=0
-        icon_name="notification-audio-volume-muted"
+        icon_name="audio-volume-muted"
         amixer set $mixer mute
     else
         display_volume=$(amixer set $mixer unmute | grep -m 1 "%]" | cut -d "[" -f2|cut -d "%" -f1)
@@ -46,15 +46,15 @@ fi
 
 if [ "$icon_name" = "" ]; then
     if [ "$display_volume" = "0" ]; then
-        icon_name="notification-audio-volume-off"
+        icon_name="audio-volume-off"
     else
         if [ "$display_volume" -lt "33" ]; then
-            icon_name="notification-audio-volume-low"
+            icon_name="audio-volume-low"
         else
             if [ "$display_volume" -lt "67" ]; then
-                icon_name="notification-audio-volume-medium"
+                icon_name="audio-volume-medium"
             else
-                icon_name="notification-audio-volume-high"
+                icon_name="audio-volume-high"
             fi
         fi
     fi

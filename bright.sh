@@ -4,7 +4,7 @@
 
 usage="usage: $0 -c {up|down}"
 command=
-increment=3%
+increment=1%
 
 while getopts h o
 do case "$o" in

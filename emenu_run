@@ -18,9 +18,9 @@ fi
 cmd=$(
     IFS=:
     if stest -dqr -n "$cache" $PATH; then
-        (tac "$hist" ; stest -flx $PATH | sort -u | tee "$cache" ) | dmenu "$@" -fn PragmataPro
+        (tac "$hist" ; stest -flx $PATH | sort -u | tee "$cache" ) | dmenu "$@" -b -f -fn PragmataPro
     else
-        (tac "$hist"; cat "$cache") | dmenu "$@" -fn PragmataPro
+        (tac "$hist"; cat "$cache") | dmenu "$@" -b -f -fn PragmataPro
     fi
     ) 
 
