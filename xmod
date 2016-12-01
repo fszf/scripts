@@ -1,0 +1,4 @@
+#!/bin/sh -
+xmodmap -e "remove mod1 = Alt_R"
+xmodmap -e "add mod4 = Alt_R"
+

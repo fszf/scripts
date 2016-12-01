@@ -54,4 +54,4 @@ if [ "$icon_name" = "" ]; then
         fi
     fi
 fi
-dunstify " " -i $icon_name -h int:value:$display_brightness -h string:synchronous:brightness
+notify-send " " -i $icon_name -h int:value:$display_brightness -h string:synchronous:brightness
