@@ -1,0 +1,16 @@
+#!/bin/bash
+# speed snapshot
+
+interface="wlan0"
+sys_dir="/sys/class/net/${interface}/statistics"
+
+rxb=$(<${sys_dir}/rx_bytes)
+txb=$(<${sys_dir}/tx_bytes)
+sleep 2 
+rxbn=$(<${sys_dir}/rx_bytes)
+txbn=$(<${sys_dir}/tx_bytes)
+
+rxdif=$(echo $((rxbn - rxb)) )
+txdif=$(echo $((txbn - txb)) )
+
+echo -e "\x04$((rxdif / 1024 / 2))KB \x06$((txdif / 1024 / 2))KB\x01"

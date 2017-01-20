@@ -1,3 +1,0 @@
-xautolock -detectsleep -corners -000 -notify 120 -notifier "notify-send 'The system is going down...'" -time 5 -locker "i3lock-fancy" &
-#compton --config ~/.config/compton.conf &
-

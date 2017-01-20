@@ -2,6 +2,6 @@
 cd ~/.wine/drive_c
 cd Program\ Files\ \(x86\)
 #cd Program\ Files/
-#cd RoomKey™\ by\ RSI/   
-cd RoomKey
+cd RoomKey™\ by\ RSI/   
+#cd RoomKey
 wine RoomKey.exe

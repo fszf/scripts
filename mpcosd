@@ -46,6 +46,6 @@ fi
 
 if [ "$STATUS" != "stop" ]; then
     #notify-send "$TITLE" "$ARTIST" -i "/media/MyBook/Music/$ARTIST/$ALBUM/$ALBUM.jpg" -h string:synchronous:mpd
-    #notify-send "$TITLE" "$ARTIST" -i notification-audio-play -t 700 -h string:synchronous:mpd
-    dunstify "$TITLE" "$ARTIST" -i notification-audio-play -t 700 -h string:synchronous:mpd
+    notify-send "$TITLE" "$ARTIST" -i notification-audio-play -t 700 -h string:synchronous:mpd
+    #dunstify "$TITLE" "$ARTIST" -i notification-audio-play -t 700 -h string:synchronous:mpd
 fi

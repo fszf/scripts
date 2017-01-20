@@ -1,4 +1,0 @@
-#!/bin/bash
-xbindkeys
-sleep 1; pkill xbindkeys
-xbindkeys

@@ -59,4 +59,5 @@ if [ "$icon_name" = "" ]; then
         fi
     fi
 fi
-notify-send " " -i $icon_name -h int:value:$display_volume -h string:synchronous:volume
+#notify-send " " -i $icon_name -h int:value:$display_volume -h string:synchronous:volume
+notify-send " " -h int:value:$display_volume -h string:synchronous:volume
